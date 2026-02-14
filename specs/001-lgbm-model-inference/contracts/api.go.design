@@ -1,0 +1,100 @@
+// Package lgbm provides pure-Go LightGBM model loading and inference.
+//
+// This file defines the PUBLIC API CONTRACT for go-lgbm.
+// It is a design document, not compilable code.
+// Implementation will follow this contract.
+
+package lgbm
+
+// ── Model Loading ──────────────────────────────────────────────
+
+// ModelFromFile loads a LightGBM text-format model from the given
+// file path. Returns an error if the file cannot be read, the
+// format is invalid, or the LightGBM version is unsupported (only
+// v3 and v4 are supported).
+//
+// If loadTransformation is true, the appropriate output
+// transformation (sigmoid, softmax, etc.) is loaded from the
+// model's objective field. If false, raw scores are returned.
+//
+// Comparable to leaves.LGEnsembleFromFile.
+func ModelFromFile(filename string, loadTransformation bool) (*Model, error)
+
+// ModelFromReader loads a LightGBM text-format model from a
+// buffered reader. Same semantics as ModelFromFile.
+//
+// Comparable to leaves.LGEnsembleFromReader.
+func ModelFromReader(reader *bufio.Reader, loadTransformation bool) (*Model, error)
+
+// ── Model ──────────────────────────────────────────────────────
+
+// Model is a loaded LightGBM model. It is immutable and safe for
+// concurrent use. A Model MUST NOT be modified after construction.
+type Model struct {
+	// unexported fields
+}
+
+// NFeatures returns the number of features the model expects.
+func (m *Model) NFeatures() int
+
+// NClasses returns the number of output classes.
+// Returns 1 for binary classification, regression, and ranking.
+func (m *Model) NClasses() int
+
+// NTrees returns the total number of trees in the model.
+func (m *Model) NTrees() int
+
+// FeatureNames returns the feature names from training, or nil if
+// not present in the model file.
+func (m *Model) FeatureNames() []string
+
+// ── Single-Row Prediction ──────────────────────────────────────
+
+// PredictSingle returns a single prediction for models with one
+// output class (binary classification, regression, ranking).
+// Returns 0 and an error for multiclass models.
+//
+// features must have length equal to NFeatures().
+// nEstimators limits the number of trees used (0 = all trees).
+//
+// Comparable to leaves.Ensemble.PredictSingle.
+func (m *Model) PredictSingle(features []float64, nEstimators int) (float64, error)
+
+// Predict writes prediction(s) into the provided output slice.
+// For single-class models, output must have length >= 1.
+// For multiclass models, output must have length >= NClasses().
+//
+// features must have length equal to NFeatures().
+// nEstimators limits the number of trees used (0 = all trees).
+//
+// Comparable to leaves.Ensemble.Predict.
+func (m *Model) Predict(features []float64, nEstimators int, output []float64) error
+
+// ── Batch Prediction ───────────────────────────────────────────
+
+// PredictDense runs prediction on a row-major dense matrix.
+//
+// vals is a flat row-major matrix of shape [nrows x ncols].
+// ncols must equal NFeatures().
+// output must have length >= nrows * NClasses().
+// nEstimators limits the number of trees used (0 = all trees).
+// nThreads controls parallelism (0 = runtime.NumCPU()).
+//
+// Comparable to leaves.Ensemble.PredictDense.
+func (m *Model) PredictDense(
+	vals []float64,
+	nrows int,
+	ncols int,
+	output []float64,
+	nEstimators int,
+	nThreads int,
+) error
+
+// ── Transformation Control ─────────────────────────────────────
+
+// WithRawPredictions returns a new Model that bypasses the output
+// transformation, returning raw tree scores instead. The returned
+// Model shares tree data with the original (no deep copy).
+//
+// Comparable to leaves.Ensemble.EnsembleWithRawPredictions.
+func (m *Model) WithRawPredictions() *Model

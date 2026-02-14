@@ -1,0 +1,22 @@
+# Go
+*.exe
+*.test
+*.out
+vendor/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage.out
+
+# Python (for golden file generation)
+__pycache__/
+*.pyc
+.venv/
+venv/
