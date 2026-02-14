@@ -8,6 +8,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/zhongdai/go-lgbm/actions/workflows/ci.yml"><img src="https://github.com/zhongdai/go-lgbm/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://pkg.go.dev/github.com/zhongdai/go-lgbm"><img src="https://pkg.go.dev/badge/github.com/zhongdai/go-lgbm.svg" alt="Go Reference"></a>
   <a href="https://goreportcard.com/report/github.com/zhongdai/go-lgbm"><img src="https://goreportcard.com/badge/github.com/zhongdai/go-lgbm" alt="Go Report Card"></a>
 </p>
@@ -37,7 +38,7 @@ It is designed as a modern, maintained replacement for [github.com/dmitryikh/lea
 ## Installation
 
 ```bash
-go get github.com/rokt/go-lgbm
+go get github.com/zhongdai/go-lgbm
 ```
 
 Requires **Go 1.21** or later.
@@ -51,7 +52,7 @@ import (
 	"fmt"
 	"log"
 
-	lgbm "github.com/rokt/go-lgbm"
+	lgbm "github.com/zhongdai/go-lgbm"
 )
 
 func main() {

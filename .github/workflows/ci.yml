@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
+      - name: Verify module path
+        run: |
+          MODULE=$(head -1 go.mod | awk '{print $2}')
+          EXPECTED="github.com/zhongdai/go-lgbm"
+          if [ "$MODULE" != "$EXPECTED" ]; then
+            echo "ERROR: go.mod module path is '$MODULE', expected '$EXPECTED'"
+            exit 1
+          fi
+
+      - name: Run go vet
+        run: go vet ./...
+
+      - name: Check formatting
+        run: |
+          UNFORMATTED=$(gofmt -l .)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "The following files are not formatted:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
+
+      - name: Run tests
+        run: go test -race -count=1 ./...

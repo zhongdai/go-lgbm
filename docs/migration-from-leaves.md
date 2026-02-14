@@ -1,6 +1,6 @@
 # Migration Guide: leaves to go-lgbm
 
-This guide maps the `github.com/dmitryikh/leaves` API to the equivalent `github.com/rokt/go-lgbm` API.
+This guide maps the `github.com/dmitryikh/leaves` API to the equivalent `github.com/zhongdai/go-lgbm` API.
 
 ## Model Loading
 
