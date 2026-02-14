@@ -11,14 +11,14 @@ import (
 // goldenData holds the reference predictions from Python LightGBM.
 type goldenData struct {
 	Inputs         [][]float64 `json:"inputs"`
-	Predictions    []float64   `json:"predictions"`    // for binary/regression/ranking (single value)
+	Predictions    []float64   `json:"predictions"`     // for binary/regression/ranking (single value)
 	RawPredictions []float64   `json:"raw_predictions"` // for binary raw scores
 }
 
 // goldenDataMulticlass holds multiclass reference predictions.
 type goldenDataMulticlass struct {
-	Inputs      [][]float64   `json:"inputs"`
-	Predictions [][]float64   `json:"predictions"` // N class probabilities per input
+	Inputs      [][]float64 `json:"inputs"`
+	Predictions [][]float64 `json:"predictions"` // N class probabilities per input
 }
 
 func loadGolden(t *testing.T, path string) goldenData {
