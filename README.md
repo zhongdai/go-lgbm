@@ -10,7 +10,6 @@
 <p align="center">
   <a href="https://github.com/zhongdai/go-lgbm/actions/workflows/ci.yml"><img src="https://github.com/zhongdai/go-lgbm/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://pkg.go.dev/github.com/zhongdai/go-lgbm"><img src="https://pkg.go.dev/badge/github.com/zhongdai/go-lgbm.svg" alt="Go Reference"></a>
-  <a href="https://goreportcard.com/report/github.com/zhongdai/go-lgbm"><img src="https://goreportcard.com/badge/github.com/zhongdai/go-lgbm" alt="Go Report Card"></a>
 </p>
 
 ---
