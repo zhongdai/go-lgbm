@@ -201,6 +201,14 @@ model, _ := lgbm.ModelFromFile("model.txt", true)
 pred, err := model.PredictSingle(features, 0)
 ```
 
+## Disclaimer
+
+> **Warning**: This project was built entirely through vibe coding with [Claude Code](https://claude.ai/claude-code). While it is thoroughly tested (87%+ coverage, golden-file verified against Python LightGBM), use it at your own risk. Review the code and run your own validation before using in production.
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
+
+## Acknowledgements
+
+Built with [Claude Code](https://claude.ai/claude-code) by Anthropic.
