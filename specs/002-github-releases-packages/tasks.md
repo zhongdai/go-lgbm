@@ -40,7 +40,7 @@
 
 - [x] T002 [US1] Create release workflow in `.github/workflows/release.yml` — trigger on push of tags matching `v*.*.*`, use `softprops/action-gh-release` action with `generate_release_notes: true`, set `prerelease` flag when tag contains a hyphen (e.g. `v1.0.0-rc.1`)
 - [x] T003 [US1] Verify release workflow handles edge cases — ensure workflow does not trigger on non-semver tags, and that duplicate tag pushes do not cause failures
-- [ ] T004 [US1] Push initial version tag `v0.1.0` to test the release workflow end-to-end and verify GitHub Release is created with changelog
+- [x] T004 [US1] Push initial version tag `v0.1.0` to test the release workflow end-to-end and verify GitHub Release is created with changelog
 
 **Checkpoint**: Pushing a version tag creates a GitHub Release automatically.
 
@@ -57,7 +57,7 @@
 - [x] T005 [US2] Update module path in `go.mod` from `github.com/rokt/go-lgbm` to `github.com/zhongdai/go-lgbm`
 - [x] T006 [US2] Update all import references in `*_test.go` and source files if any use the full module path
 - [x] T007 [US2] Run `go test -race ./...` to verify module path change does not break existing tests
-- [ ] T008 [US2] Verify Go module proxy indexes the version by running `go get github.com/zhongdai/go-lgbm@v0.1.0` from a temporary project after the v0.1.0 release exists
+- [x] T008 [US2] Verify Go module proxy indexes the version by running `go get github.com/zhongdai/go-lgbm@v0.1.0` from a temporary project after the v0.1.0 release exists
 
 **Checkpoint**: The module is installable via `go get` with the public GitHub URL.
 
@@ -73,7 +73,7 @@
 
 - [x] T009 [US3] Create CI workflow in `.github/workflows/ci.yml` — trigger on pull_request targeting main and push to main, steps: checkout, setup Go 1.21+ with module caching, run `go vet ./...`, run `go test -race -count=1 ./...`
 - [x] T010 [US3] Add module path validation step to CI workflow — verify `go.mod` module path matches `github.com/zhongdai/go-lgbm`
-- [ ] T011 [US3] Push the CI workflow to main and verify it runs on a test PR
+- [x] T011 [US3] Push the CI workflow to main and verify it runs on a test PR
 
 **Checkpoint**: Every PR and push to main runs the full test suite and quality checks.
 
@@ -86,7 +86,7 @@
 - [x] T012 [P] Update README.md to add CI status badge from `.github/workflows/ci.yml`
 - [x] T013 [P] Update README.md installation section to use `github.com/zhongdai/go-lgbm` module path
 - [x] T014 Verify all workflows are syntactically valid by pushing to a branch and checking GitHub Actions tab
-- [ ] T015 Run quickstart.md validation — verify `go get github.com/zhongdai/go-lgbm@v0.1.0` works after the first release
+- [x] T015 Run quickstart.md validation — verify `go get github.com/zhongdai/go-lgbm@v0.1.0` works after the first release
 
 ---
 
