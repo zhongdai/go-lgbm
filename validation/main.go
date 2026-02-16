@@ -25,12 +25,12 @@ type testData struct {
 }
 
 type modelResult struct {
-	Name        string
-	TestCases   int
-	MaxAbsDiff    float64
-	MeanAbsDiff   float64
-	Pass          bool
-	Error         string
+	Name              string
+	TestCases         int
+	MaxAbsDiff        float64
+	MeanAbsDiff       float64
+	Pass              bool
+	Error             string
 	LeavesUnsupported bool
 }
 
