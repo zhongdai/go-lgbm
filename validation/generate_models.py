@@ -8,8 +8,9 @@ test inputs per model as JSON.
 
 import json
 import os
-import numpy as np
+
 import lightgbm as lgb
+import numpy as np
 from sklearn.datasets import make_classification, make_regression
 
 SEED = 42
@@ -103,9 +104,7 @@ def generate_multiclass():
         json.dump(
             {"inputs": inputs, "n_features": N_FEATURES, "n_classes": n_classes}, f
         )
-    print(
-        f"  multiclass: {N_TRAIN} train, {N_TEST} test inputs, {n_classes} classes"
-    )
+    print(f"  multiclass: {N_TRAIN} train, {N_TEST} test inputs, {n_classes} classes")
 
 
 def generate_regression():
@@ -146,7 +145,9 @@ def generate_ranking():
         random_state=SEED + 3,
     )
     # Convert to relevance labels 0-4
-    y = np.clip(np.round((y_raw - y_raw.min()) / (y_raw.max() - y_raw.min()) * 4), 0, 4).astype(int)
+    y = np.clip(
+        np.round((y_raw - y_raw.min()) / (y_raw.max() - y_raw.min()) * 4), 0, 4
+    ).astype(int)
     # Create groups of 20 documents each
     group_size = 20
     n_groups = N_TRAIN // group_size
