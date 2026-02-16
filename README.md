@@ -201,6 +201,23 @@ model, _ := lgbm.ModelFromFile("model.txt", true)
 pred, err := model.PredictSingle(features, 0)
 ```
 
+## Validation Against leaves
+
+go-lgbm is validated against [leaves](https://github.com/dmitryikh/leaves) to ensure prediction equivalence. The [full comparison report](validation/REPORT.md) tests 1,000 random inputs per model type:
+
+| Model Type | Max Abs Diff | Status |
+|------------|-------------|--------|
+| Binary Classification | 0.00e+00 | PASS |
+| Multiclass Classification | 5.55e-16 | PASS |
+| Regression | 0.00e+00 | PASS |
+| Ranking | - | SKIP (leaves unsupported) |
+
+To re-run the validation yourself:
+
+```bash
+just validate
+```
+
 ## Disclaimer
 
 > **Warning**: This project was built entirely through vibe coding with [Claude Code](https://claude.ai/claude-code). While it is thoroughly tested (87%+ coverage, golden-file verified against Python LightGBM), use it at your own risk. Review the code and run your own validation before using in production.

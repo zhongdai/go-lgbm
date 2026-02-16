@@ -90,5 +90,9 @@ major:
     git push origin "$new"
     echo "Tagged and pushed ${new}"
 
+# Run leaves comparison validation (generate models + compare predictions)
+validate:
+    just --justfile validation/justfile all
+
 # Run all checks (lint + test) — useful before tagging
 check: lint test

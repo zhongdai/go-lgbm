@@ -1,0 +1,12 @@
+# Validation suite: compare go-lgbm vs leaves predictions
+
+# Generate LightGBM models and test inputs using Python
+generate-models:
+    python3 generate_models.py
+
+# Run Go validation program (models must exist)
+validate:
+    go run .
+
+# Run full validation: generate models then compare
+all: generate-models validate
